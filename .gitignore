@@ -1,5 +1,8 @@
 node_modules/
-public/
+public/assets/
+public/data/
+public/css/
+public/js/
 source/.sass-cache/
 source/css/
 package-lock.json

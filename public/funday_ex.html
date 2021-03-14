@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>funday</title>
+		<link rel="stylesheet" href="./css/5-2.css">
+	</head>
+	<body> 
+		<canvas id="mycanvas"></canvas>
+		<!-- <script src="./js/5-2.js"></script> -->
+		<script>
+			const canvas = document.getElementById("mycanvas")
+			const ctx = canvas.getContext('2d');
+			const blockWidth = 90;
+			const PI = Math.PI; //半個圈
+			const PI2 = Math.PI*2;//一個圈
+
+			canvas.width = blockWidth * 3;
+			canvas.height = blockWidth * 3;
+
+			const color = {
+				red: "#F74456",
+				white: "#fff",
+				yellow: "#F1DA56",
+				blue: "#036FAF",
+				funday: {
+					red: "#f74769",
+					blue: "#003366",
+					green: "#14d1bf"
+				}
+			};
+
+			let time = 0;
+
+			// 最外格局 : 九宮格繪製
+			const drawBlock = function(pos, bgColor, draw, time){
+				ctx.save();
+				ctx.translate(pos.x * blockWidth, pos.y * blockWidth);//給位置 translate()
+        // 方 v
+				ctx.fillStyle = bgColor;//給色
+				ctx.fillRect(0, 0, blockWidth, blockWidth);// 繪製矩形 .fillRect(起點x,起點y, 結點x, 結點y)
+				// 園 v
+        // ctx.arc(blockWidth/2,blockWidth/2,blockWidth/2,0,PI2);
+        // ctx.fillStyle = bgColor;
+        ctx.fill();
+        //
+        ctx.translate(blockWidth/2, blockWidth/2);// 座標移動到此 rect 正中央
+				draw();
+				ctx.restore();
+			};
+
+			// 每小格局
+			const draw = function(){
+				time ++;//+1使每繪製結束,時間就推移,形成動畫                           << 每秒運作(+1) 1 次
+				// ^^ 搭配 requestAnimationFrame(draw) 不斷運作,帶出變化的數據,形成動畫 << 每秒運作60次
+				let stime = parseInt(time/20);// 1/3 秒
+				drawBlock( {x: 0, y: 0}, color.white, function(){
+          ctx.beginPath();
+					ctx.fillStyle = color.funday.red;
+          ctx.fillRect(-30,-20,29,40);
+          ctx.fill();
+          //
+					ctx.beginPath();
+          ctx.fillStyle = "white";
+          ctx.fillRect(-25,-15, 19, 5);
+          ctx.fill();
+          //
+					ctx.beginPath();
+          ctx.fillStyle = "white";
+          ctx.fillRect(-25,-5, 11, 5);
+          ctx.fill();
+          //
+					ctx.beginPath();
+          ctx.fillStyle = color.funday.blue;
+          ctx.fillRect(1,-20,29,40);
+          ctx.fill();
+          //
+					ctx.beginPath();
+					ctx.beginPath();
+          ctx.fillStyle = "white";
+          ctx.fillRect(6, -15, 19, 5);
+          ctx.fill();
+					//
+					ctx.beginPath();
+					ctx.beginPath();
+          ctx.fillStyle = "#ccc";
+          ctx.fillRect(6, 0, stime%6 + 5, 5);
+          ctx.fill();
+					//
+					ctx.beginPath();
+					ctx.translate(stime%6 + 15, 4);
+          ctx.rotate(stime%2 * PI / -18);
+					ctx.rotate(-35 * PI / 180);
+          ctx.fillStyle = color.funday.green;
+          ctx.fillRect(0, -3, 25, 6);
+					ctx.fill();
+					ctx.fillStyle = color.funday.green;
+					ctx.rotate(-45 * PI / 180);
+          ctx.fillRect(-2, -2, 4, 4);
+					ctx.fill();
+				}, time);
+
+				drawBlock( {x: 1, y: 0}, "gray", function(){
+					ctx.beginPath();
+					ctx.fillStyle = color.funday.green;
+					ctx.fillRect(-28, -25, 30, 22);
+					ctx.fill();
+					//
+						ctx.beginPath();
+						ctx.arc(-21,-15,2,0,PI2)
+						ctx.fillStyle = (stime%6==0) ? color.funday.blue:"white";
+						ctx.fill();
+						//
+						ctx.beginPath();
+						ctx.arc(-13,-15,2,0,PI2)
+						ctx.fillStyle = (stime%6==1) ? color.funday.blue:"white";
+						ctx.fill();
+						//
+						ctx.beginPath();
+						ctx.arc(-5,-15,2,0,PI2)
+						ctx.fillStyle = (stime%6==2) ? color.funday.blue:"white";
+						ctx.fill();
+					//
+          ctx.beginPath();
+					ctx.fillStyle = color.funday.red;
+					ctx.fillRect(-8, 3, 30, 22);
+					ctx.fill();
+					//
+						ctx.beginPath();
+						ctx.arc(-1,14,2,0,PI2)
+						ctx.fillStyle = (stime%6==3) ? "white" : color.funday.blue;
+						ctx.fill();
+						//
+						ctx.beginPath();
+						ctx.arc(7,14,2,0,PI2)
+						ctx.fillStyle = (stime%6==4) ? "white" : color.funday.blue;
+						ctx.fill();
+						//
+						ctx.beginPath();
+						ctx.arc(15,14,2,0,PI2)
+						ctx.fillStyle = (stime%6==5) ? "white" : color.funday.blue;
+						ctx.fill();
+					//
+          ctx.beginPath();
+					ctx.translate(-22, -3);
+					ctx.rotate(-45 * PI / 180);
+					ctx.fillStyle = color.funday.green;
+					ctx.fillRect(0, 0, 5, 5);
+					ctx.fill();
+					//
+          ctx.beginPath();
+					ctx.translate(3, 43);
+					ctx.fillStyle = color.funday.red;
+					ctx.fillRect(0, 0, 5, 5);
+					ctx.fill();
+				}, time);
+
+				drawBlock( {x: 2, y: 0}, "white", function(){
+
+				}, time);
+
+				//-----------------------------
+				drawBlock( {x: 0, y: 1}, color.yellow, function(){
+
+				}, time);
+
+				drawBlock( {x: 1, y: 1}, color.red, function(){
+
+				}, time);
+
+				drawBlock( {x: 2, y: 1}, color.blue, function(){
+
+				}, time);
+
+				//-----------------------------
+				drawBlock( {x: 0, y: 2}, color.red, function(){
+					ctx.fillStyle = "white"//給色
+					ctx.fillRect(0, 0, 10, 10);// 繪製矩形 .fillRect(起點x,起點y, 結點x, 結點y)
+					ctx.fill();
+				}, time);
+
+				drawBlock( {x: 1, y: 2}, color.blue, function(){
+					ctx.beginPath()
+					ctx.arc(0,0,15,0,PI2);
+					ctx.strokeStyle="white";
+					ctx.lineWidth= 10;
+					ctx.stroke();
+				}, time);
+
+				drawBlock( {x: 2, y: 2}, color.yellow, function(){
+					ctx.beginPath()// 開始繪製, 配合36translate 中心畫起
+					ctx.arc(0,0,30,0,PI2);// 畫圓 .arc(起點x,起點y,半徑,開畫角度,收尾角度)
+					ctx.fillStyle='white';
+					ctx.fill();//填滿區域 .fill
+				}, time);
+
+				requestAnimationFrame(draw);
+			}
+
+			requestAnimationFrame(draw);//類似 setTimeout,每結束就在執行一次函式
+
+			// ACTION v
+			// drawBlock({x: 0, y: 0}, color.blue, function(){
+			// 	ctx.beginPath()// 開始繪製, 配合36translate 中心畫起
+			// 	ctx.arc(0,0,30,0,PI2);// 畫圓 .arc(起點x,起點y,半徑,開畫角度,收尾角度)
+			// 	ctx.fillStyle='white';
+			// 	ctx.fill();//填滿區域 .fill
+			// }, 0);
+		</script>
+	</body>
+</html>
+<!--
+#################################
+僅可 js inside
+美小圖必須有 ctx.beginPath() 開畫, 以封閉圖型
+#################################
+-->
