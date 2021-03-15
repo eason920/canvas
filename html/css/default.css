@@ -1,0 +1,16 @@
+body, html{
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
+	background-color: #aaa;
+}
+body{
+	/* background-image: url('8.jpg'); */
+}
+canvas{
+	width: 400px;
+	height: 400px;
+	box-shadow: 2px 2px 12px rgba(0,255,0,.5);
+	background-color: rgba(255,255,255,.5)
+}

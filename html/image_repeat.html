@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>image with repeat</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
 	<p>要用到的圖片：<span style="color:red">變化參數(點button)才使顯示正確</span></p>
@@ -14,7 +15,7 @@
 	<button onclick="draw('repeat')">Repeat</button> 
 	<button onclick="draw('repeat-x')">Repeat-x</button> 
 	<button onclick="draw('repeat-y')">Repeat-y</button> 
-	<button onclick="draw('no-repeat')">No-repeat</button>     
+	<button onclick="draw('no-repeat')" id="btnNoRepeat">No-repeat</button>     
 
 	<canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
 	Your browser does not support the HTML5 canvas tag.</canvas>
@@ -33,7 +34,10 @@
 		ctx.fill();
 	};
 
+	$('#btnNoRepeat').click().click().click();
 	draw('no-repeat');
+	// draw('no-repeat');
+	// draw('no-repeat');
 </script>
 
 </body>

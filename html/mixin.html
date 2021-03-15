@@ -5,135 +5,27 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>mixin</title>
-	<style>
-		body, html{
-			display: flex;
-			height: 100vh;
-			justify-content: center;
-			align-items: center;
-			background-color: #aaa;
-		}
-		body{
-			/* background-image: url('8.jpg'); */
-		}
-		canvas{
-			width: 400px;
-			height: 400px;
-			box-shadow: 2px 2px 12px rgba(0,255,0,.5);
-			background-color: rgba(255,255,255,.5)
-		}
-	</style>
+	<!-- <link rel="stylesheet" href="./css/default.css"> -->
 </head>
 <body>
-	<!-- <img src="lamp.gif" id="pic"> -->
-	<button onclick="draw('repeat')">Repeat</button> 
-	<button onclick="draw('repeat-x')">Repeat-x</button> 
-	<button onclick="draw('repeat-y')">Repeat-y</button> 
-	<button onclick="draw('no-repeat')">No-repeat</button>     
-
-	<canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
-	Your browser does not support the HTML5 canvas tag.</canvas>
+	<canvas id="mycanvas" width="300" height="300" ></canvas>
 	<script>
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
+		const canvas = document.getElementById("mycanvas");
+		const ctx = canvas.getContext("2d");
 
-// --------------------------------
-// -- IMAGES
-// --------------------------------
-function draw(direction){
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	var img = new Image();
-	img.src="./images/lamp.gif";
-	var pat = ctx.createPattern( img, direction );
-	ctx.rect(0,0,400,400);
-	ctx.fillStyle=pat;
-	ctx.fill();
-};
+		ctx.fillStyle = "#ff0000";
+		ctx.fillRect(10, 10, 50, 50);
 
-draw('no-repeat');
+		ctx.globalCompositeOperation = 'xor';
 
-ctx.globalCompositeOperation = 'source-out';
- 
-// ctx.fillStyle = "rgba(0,0,255,1)";
-// ctx.fillRect(30, 30, 50, 50);
+		const gradient = ctx.createRadialGradient(0, 0, 20, 0, 0, 120);
+		gradient.addColorStop(0, "#ccc");
+		gradient.addColorStop(1, "rgba(255,255,255,0)");
+		ctx.fillStyle = gradient;
+		ctx.fillRect(0, 0, 100, 100);
 
 
-// --------------------------------
-// -- SHADOW v
-// --------------------------------
-// //設定陰影屬性
-// draw.shadowOffsetX = 5;
-// draw.shadowOffsetY = 3;
-// draw.shadowBlur = 5;
-// draw.shadowColor = 'rgba(0, 0, 0, 1)';
 
-// //畫一個紅色矩形
-// draw.fillStyle = 'red';
-// draw.fillRect(0, 0, 100, 200);
-
-// --------------------------------
-// -- GRADIENT LINE v
-// --------------------------------
-// var gradient = draw.createLinearGradient(50, 50, 100, 100);
- 
-// //設定色票階層
-// gradient.addColorStop(0, "rgba(0,0,0,0)"); // = gradient.addColorStop(0, "transparent");
-// gradient.addColorStop(.3, "rgba(0,0,0,.2)");
-// gradient.addColorStop(.6, "#000");
-// gradient.addColorStop(.9, "green");
-// gradient.addColorStop(1, "#333333");
- 
-// //引用漸層色票並繪畫矩形
-// draw.fillStyle = gradient;
-// draw.fillRect(0, 0, 500, 500);
-
-// --------------------------------
-// -- GRADIENT RADIO v
-// --------------------------------
-// //建立放射性漸層色票
-// var gradient = draw.createRadialGradient(0, 0, 20, 0, 0, 120);
- 
-// //設定色票階層
-// gradient.addColorStop(0, "#CCCCCC");
-// gradient.addColorStop(1, "#333333");
- 
-// //引用漸層色票並繪畫矩形
-// draw.fillStyle = gradient;
-// draw.fillRect(0, 0, 400, 400);
-
-// --------------------------------
-// -- 建立圖片物件 > 詳看 image.html 範例
-// --------------------------------
-//
-
-// --------------------------------
-// -- canvas 合成
-// --------------------------------
-// //畫一個紅色矩形
-// draw.globalAlpha = .5;
-// draw.fillStyle = "#ff0000";
-// draw.fillRect(10, 10, 50, 50);
- 
-// //將透明度設為 0.5
-// draw.globalAlpha = .7;
-
-// //畫出一個半透明的藍色矩形
-// draw.fillStyle = "rgba(0,0,255,1)";
-// draw.fillRect(30, 30, 50, 50);
- 
-// //將透明度還原為預設值
-// draw.globalAlpha = 0;
-
-// --------------------------------
-// -- canvas 合成2
-// --------------------------------
-// draw.fillStyle = "#ff0000";
-// draw.fillRect(10, 10, 50, 50);
- 
-// draw.globalCompositeOperation = 'source-in';
- 
-// draw.fillStyle = "rgba(0,0,255,1)";
-// draw.fillRect(30, 30, 50, 50);
 
 
 	</script>
