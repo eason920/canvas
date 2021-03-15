@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>image demo 1</title>
+</head>
+<body>
+	<figure id="bridgeContainer">
+		<canvas id="bridge" width="290" height="250"></canvas>
+		<figcaption>Downtown Calgary in 2013 and 1943; mouse down or touch on photo to reveal</figcaption>
+	</figure>
+	<figure>case by <a href="https://codepen.io/dudleystorey/pen/yJQxLX">here</a></figure>
+	<script>
+		var bridge = document.getElementById("bridge"),
+		bridgeCanvas = bridge.getContext('2d'),
+		img = new Image();
+		// img.loc = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/';
+		// img.filename = 'calgary-bridge-2013.jpg';
+		// img.src = img.loc + img.filename;
+		img.src= "./images/8.jpg";
+
+		img.onload = function(){
+			bridgeCanvas.drawImage(img, 0, 0, bridge.width, bridge.height);
+		}
+	</script>
+</body>
+</html>
