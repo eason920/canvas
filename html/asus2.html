@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>asus2</title>
+	<style>
+		body, html{
+			background-color: #aaa;
+		};
+
+		figure{padding: 0; margin: 0}
+		canvas{
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		figcaption{
+			margin-top: 380px;
+			margin-left: 0;
+		}
+	</style>
+</head>
+<body>
+	<figure>
+		<canvas id="b" id="canvas" width="699" height="368"></canvas>
+		<canvas id="t" id="canvas" width="699" height="368"></canvas>
+		<figcaption>case by eason</figcaption>
+	</figure>
+	<script>
+		const b = document.getElementById("b");
+		const ctx_b = b.getContext("2d");
+		const img_b = new Image();
+		img_b.src="./images/0.jpg";
+
+		const w = b.width;
+		const h = b.height;
+
+		const t = document.getElementById("t");
+		const ctx_t = t.getContext("2d");
+		const img_t = new Image();
+		img_t.src="./images/1.jpg";
+
+
+		let time = 0;
+    const animate = function(){
+			time ++;
+			const stime = parseInt(time/3);
+			const y = stime%30 * 10 * -1;
+			ctx_b.beginPath();
+			ctx_b.drawImage(img_b, 0, 0, w, h);
+			ctx_t.drawImage(img_t, 0, 0, w, h);
+			ctx_b.closePath();
+
+			ctx_t.save();
+			ctx_t.translate(w/2, h/2);
+			ctx_t.globalCompositeOperation = "destination-in";
+			ctx_t.beginPath();
+			ctx_t.ellipse( 0, y, w/2, h/2, 0 , 0 , Math.PI*2);
+			ctx_t.fillStyle="white";
+			ctx_t.fill();
+			ctx_t.restore();
+
+			requestAnimationFrame(animate);
+		};
+
+		img_b.onload = function(){
+			requestAnimationFrame(animate);
+			// animate;
+		};
+	</script>
+</body>
+</html>
+<!--
+canvas 的 w h 寫在 html property 解析度 > 寫在 css
+
+
+-->
