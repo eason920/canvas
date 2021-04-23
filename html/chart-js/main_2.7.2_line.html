@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Line</title>
+</head>
+
+<body>
+	<style>
+		body{
+			background: #333;
+		}
+		#myChat,
+		iframe,
+		.outer {
+			width: 300px;
+			height: 300px;
+		}
+	</style>
+	<script src="js/Chart-2.7.2.min.js"></script>
+	<div class="outer">
+		<canvas id="myChart" width="400" height="400"></canvas>
+	</div>
+
+	<script>
+		const color1 = 'red';
+		const color2 = 'rgba(0,255,0,.5)';
+		const ctx = document.getElementById('myChart');
+		const myChart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: ["JAN", "FAR", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+				datasets: [{
+					data: [60, 49, 72, 101, 35, 77, 88, 225, 320, 150, 150, 300],
+					backgroundColor: color2,
+					borderColor: color1,
+					pointBackgroundColor: color1,
+					pointBorderColor: "#fff",
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: color1,
+					borderWidth: .4
+				}]
+			},
+			options: {
+				legend: {
+					display: false
+				},
+				tooltips: { // AREA : 在點上 mouseover 出的報告小視窗
+					enabled: true, // 是否要運作
+					caretPadding: 10, // 與 point 的距離
+					displayColors: false, // 小色塊顯示
+					backgroundColor: 'rgba(255,255,255,.8)',
+					titleFontColor: '#000',
+					bodyFontColor: '#333'
+				},
+				scales: {
+					yAxes: [{
+						gridLines: {
+							// drawTicks: false,
+							// display: false
+							display: true,
+							color: '#fff',
+							lineWidth: .2
+						},
+						ticks: { // y 向文字
+							fontColor: "#ccc",
+							fontStyle: "normal",
+							fontSize: 10,
+							beginAtZero: true,
+							maxTicksLimit: 5,
+							padding: 0
+						}  
+				  }],
+				  xAxes: [{
+						gridLines: {
+							// zeroLineColor: "#ccc"
+							display: true,
+							color: '#fff',
+							lineWidth: .2
+						},
+						ticks: { // x 向文字
+							padding: 0, // 字 & 軸的距離
+							fontColor: "#ccc",
+							fontStyle: "normal",
+							fontSize: 10
+						}
+				  }]
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>

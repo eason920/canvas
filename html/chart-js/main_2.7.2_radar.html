@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Radar 2</title>
+	<style>
+		body {
+			background: #333;
+		}
+
+		#canvas {
+			/* width: 300px; */
+			/* height: 300px; */
+		}
+	</style>
+	<script src="js/Chart-2.7.2.min.js"></script>
+</head>
+
+<body>
+	<canvas id="canvas" width="400" height="400"></canvas>
+	<script>
+		const color1 = 'red';
+		const color2 = 'rgba(0,255,0,.5)';
+		const myRadarChart = new Chart(document.getElementById("canvas"), {
+			type: 'radar',
+			data: {
+				labels: [
+					["OS", "Windows"],
+					["MS", "Office"],
+					["MS", "SharePoint"],
+					["MS", "Excel/VBA"],
+					["OS", "macOS"]
+				],
+				datasets: [{
+					data: [2, 3, 5, 1.7, 2],
+					backgroundColor: color2,
+					borderColor: color1,
+					pointBackgroundColor: color1,
+					pointBorderColor: color1,
+					pointHoverBackgroundColor: "#fff",
+					pointHoverBorderColor: color1,
+					borderWidth: .1
+				}]
+			},
+			options: {
+				responsive: false,
+				maintainAspectRatio: true,
+				scale: {
+					gridLines: { // AREA : x & y 軸(axis)導引線
+						display: true,
+						color: '#fff',
+						lineWidth: .2
+					},
+					angleLines: { // 放射導引線
+						display: true,
+						lineWidth: .2,
+						color: '#fff'
+					},
+					ticks: { // AREA : 同心導引圈的「數字」
+						beginAtZero: true,
+						stepSize: 1, // 限定每圈彼此的間隔數字
+						min: 0,
+						max: 5,
+						backdropColor: 'transparent',// 文字背景清空
+						display: false, // 導引圈數字隱藏
+						borderColor: '#fff',
+					},
+					pointLabels: { // AREA : 各軸代表意義文字
+						display: true,
+						fontSize: 13, // 字級
+						fontColor: "#f74769",
+						fontFamily: "PingFangTC-Regular, Microsoft JhengHei, sans-serif"
+					}
+				},
+				legend: { // AREA : 上方導引色塊
+					display: false
+				},
+				tooltips: { // AREA : 在點上 mouseover 出的報告小視窗
+					enabled: false, // 是否要運作
+					caretPadding: 10, // 與 point 的距離
+					displayColors: false, // 小色塊顯示
+				}
+			}
+		});
+		// Chart.defaults.global.defaultFontColor = "transparent"; // 全域文字清空 (包括本例以外chart物件)
+	</script>
+</body>
+
+</html>

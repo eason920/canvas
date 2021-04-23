@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>canvas 初始化</title>
+</head>
+<body>
+	
+
+	<script>
+		Chart.plugins.register({
+			afterDatasetsDraw: function(chartInstance, easing) {
+				const ctx = chartInstance.chart.ctx;
+				chartInstance.data.datasets.forEach(function() {
+					if (!meta.hidden && meta.type == 'pie' ) {
+						ctx.clearRect(0,0,135,135) // <<<<<<<******* 請見Githob「crm」範例的「js/crm_ac_list.js」關閉 detail時的重置
+					}
+				});
+			}
+		});
+	</script>
+</body>
+</html>

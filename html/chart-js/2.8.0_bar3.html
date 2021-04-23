@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+body{
+  background-color: #333;
+}
+
+#barChart{
+  background-color: aliceblue;
+  border-radius: 6px;
+}
+
+
+  </style>
+  <script src='js/Chart-2.8.0.min.js'></script>
+</head>
+<body>
+<!--
+Ref :http://stackoverflow.com/questions/40333470/customizing-tooltip-on-chart-js-bar-chart/40334479#40334479
+-->
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+<!--       Chart.js Canvas Tag -->
+      <canvas id="barChart"></canvas>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>
+<script>
+  var canvas = document.getElementById("barChart");
+var ctx = canvas.getContext('2d');
+
+// Global Options:
+ Chart.defaults.global.defaultFontColor = 'dodgerblue';
+ Chart.defaults.global.defaultFontSize = 16;
+
+// Data with datasets options
+var data = {
+    labels: ["Vanilla", "Chocolate", "Strawberry"],
+      datasets: [
+        {
+            label: "Ice Cream Prices ",
+            fill: true,
+            backgroundColor: [
+                'moccasin',
+                'saddlebrown',
+                'lightpink'],
+            data: [11, 9, 4]
+        }
+    ]
+};
+
+var options = {
+tooltips: {
+        callbacks: {
+            label: function(tooltipItem) {
+                return "$" + Number(tooltipItem.yLabel) + " and so worth it !";
+            }
+        }
+    },
+        title: {
+                  display: true,
+                  text: 'Ice Cream Truck',
+                  position: 'bottom'
+              },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+};
+
+// Chart declaration:
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: options
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang='ja'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width: device-width, initial-scale= 1, user-scalable= no'>
+  <title>Line Chart Test</title>
+  <style>
+    .box,
+    #lineChart {
+      width: 600px;
+      height: 600px;
+    }
+  </style>
+  <script src='js/Chart-2.8.0.min.js'></script>
+  <script>
+    function displayLineChart() {
+      var ctx = document.getElementById('lineChart');
+      var lineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          datasets: [{
+            label: 'line 1',
+            data: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          }, {
+            label: 'line 2',
+            data: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34],
+            backgroundColor: 'rgba(255, 206, 86, 0.2)',
+            borderColor: 'rgba(255, 206, 86, 1)',
+            borderWidth: 1
+          }]
+        }
+      });
+    }
+  </script>
+</head>
+
+<body onload='displayLineChart();'>
+  <div class='box'>
+    <canvas id='lineChart' height='450' width='800'></canvas>
+  </div>
+</body>
+
+</html>

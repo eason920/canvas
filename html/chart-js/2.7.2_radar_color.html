@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Radar color</title>
+	<style>
+		body{
+			background-color: #bbb;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas id="chart"></canvas>
+	<script src="js/Chart-2.7.2.min.js"></script>
+	<script>
+		var chart1 = new Chart(document.getElementById('chart'), {
+			type: 'radar',
+			data: {
+				labels: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
+				datasets: [{
+					label: 'series1',
+					data: [1.4, 2, 3, 6, 3, 2, 4]
+				}]
+			},
+			options: {
+				scale: {
+					gridLines: {
+						// 導引線色彩清空
+						color: ['transparent']
+						// 全彩
+						// color: ['transparent', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo']
+					},
+					ticks: {
+						// 文字背景清空
+						backdropColor: 'transparent'
+					}
+				}
+			}
+		});
+		// 文字色彩清空
+		Chart.defaults.global.defaultFontColor = "transparent";
+	</script>
+</body>
+
+</html>

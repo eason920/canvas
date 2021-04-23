@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pie</title>
+	<script src="./js/Chart-2.8.0.min.js"></script>
+</head>
+<body>
+	<div style="width: 200px;height: 200px">
+
+		<canvas id="oilChart" width="200" height="200"></canvas>
+	</div>
+	<script>
+		var oilCanvas = document.getElementById("oilChart");
+
+		Chart.defaults.global.defaultFontFamily = "Lato";
+		Chart.defaults.global.defaultFontSize = 18;
+
+		var oilData = {
+			labels: [
+				// "Saudi Arabia",
+				"Russia",
+				"Iraq",
+				"Sam",
+				"Eason"
+			],
+			datasets: [{
+				data: [
+					// 133.3, 
+					86.2, 
+					52.2, 
+					51.2, 
+					50.2
+				],
+				backgroundColor: [
+					"#FF6384",
+					"#63FF84",
+					"#84FF63",
+					"#8463FF",
+					"#6384FF"
+				]
+			}]
+		};
+
+		var pieChart = new Chart(oilCanvas, {
+			type: 'pie',
+			data: oilData,
+			options: {
+				legend: { // AREA : 上方導引色塊
+					display: false
+				},
+				title: {
+					display: true,
+					text: 'What happens when you lend your Hoodie to a girl ?',
+					position: 'top'
+				}
+			}
+		});
+
+		// 加數字，參考 https://codepen.io/k3no/pen/WGmVBr
+		Chart.plugins.register({
+			afterDatasetsDraw: function(chartInstance, easing) {
+				// To only draw at the end of animation, check for easing === 1
+				var ctx = chartInstance.chart.ctx;
+				chartInstance.data.datasets.forEach(function(dataset, i) {
+					var meta = chartInstance.getDatasetMeta(i);
+					if (!meta.hidden) {
+						meta.data.forEach(function(element, index) {
+							// Draw the text in black, with the specified font
+							ctx.fillStyle = '#000';
+							var fontSize = 16;
+							var fontStyle = 'normal';
+							var fontFamily = 'Helvetica Neue';
+							ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+							// Just naively convert to string for now
+							var dataString = dataset.data[index].toString();
+							// Make sure alignment settings are correct
+							ctx.textAlign = 'center';
+							ctx.textBaseline = 'middle';
+							var padding = 5;
+							var position = element.tooltipPosition();
+							ctx.fillText(dataString + '%', position.x, position.y - (fontSize / 2) - padding);
+						});
+					}
+				});
+			}
+		});
+	</script>
+</body>
+</html>

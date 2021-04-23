@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Radar</title>
+	<style>
+		.outer{
+			width: 300px;
+			height: 300px;
+		}
+	</style>
+</head>
+<body>
+	<script src='js/Chart-2.4.0.min.js'></script>
+	<div class="outer">
+		<canvas id="myChart" width="400" height="400"></canvas>
+	</div>
+	<script>
+		var ctx = document.getElementById('myChart').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: 'radar',
+				data: {
+					labels: ['a', 'b', 'c', 'd', 'e'],
+					datasets: [{
+						label: ' ',
+						data: [3, 2, 5, 3 , 7],
+						backgroundColor: 'rgba(54, 162, 235, 0.2)',
+						borderColor: 'rgba(54, 162, 235, 1)',
+						borderWidth: 1
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+			});
+	</script>
+	
+</body>
+</html>

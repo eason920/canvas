@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
+  <script src='js/Chart-2.8.0.min.js'></script>
+	<canvas id="myChart" width="400" height="400"></canvas>
+	<script>
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ['5/1','5/2','5/3','5/4','5/5','5/6','5/7'],
+				datasets: [{
+					label: '# of Votes',
+					// data: [600, 570, 600, 550, 600, 300, 50],
+          data: [0,30,0,50,0,30,0],
+					backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(255, 99, 132, 0.2)'
+						// 'rgba(54, 162, 235, 0.2)',
+						// 'rgba(54, 162, 235, 0.2)',
+						// 'rgba(54, 162, 235, 0.2)',
+						// 'rgba(54, 162, 235, 0.2)',
+						// 'rgba(54, 162, 235, 0.2)',
+						// 'rgba(54, 162, 235, 0.2)',
+						// 'rgba(54, 162, 235, 0.2)'
+						// 'rgba(255, 206, 86, 0.2)',
+						// 'rgba(75, 192, 192, 0.2)',
+						// 'rgba(153, 102, 255, 0.2)',
+						// 'rgba(255, 159, 64, 0.2)',
+            // 'rgba(255, 99, 132, 0.2)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				legend: {
+					display: false
+				},
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
+			}
+		});
+
+
+	Chart.plugins.register({
+		afterDatasetsDraw: function(chartInstance, easing) {
+			// To only draw at the end of animation, check for easing === 1
+			var ctx = chartInstance.chart.ctx;
+			chartInstance.data.datasets.forEach(function(dataset, i) {
+				var meta = chartInstance.getDatasetMeta(i);
+				if (!meta.hidden ) {
+					meta.data.forEach(function(element, index) {
+						// Draw the text in black, with the specified font
+						ctx.fillStyle = 'grey';
+						var fontSize = 16;
+						var fontStyle = 'normal';
+						var fontFamily = 'Helvetica Neue';
+						ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+						// Just naively convert to string for now
+						var dataString = dataset.data[index].toString();
+						// Make sure alignment settings are correct
+						ctx.textAlign = 'center';
+						ctx.textBaseline = 'middle';
+						var padding = -15;
+						var position = element.tooltipPosition();
+						if( dataset.data[index].toString() != 0 ){
+							ctx.fillText(dataString + '分', position.x, position.y - (fontSize / 2) - padding);
+						}
+					});
+				}
+			});
+		}
+	});
+	</script>
+</body>
+</html>

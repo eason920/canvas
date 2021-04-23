@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Radar : A PEN BY Daniel Racine</title>
+	<script src="js/Chart-2.7.2.min.js"></script>
+</head>
+
+<body>
+
+	<canvas id="chart-business-skills"></canvas>
+	
+	<script>
+		var cBusiness = document.getElementById("chart-business-skills");
+		var myChartBusiness = new Chart(cBusiness, {
+			type: 'radar',
+			data: {
+				labels: [["Process", "Excellence"], ["Problem", "Solving"], "Facilitation", ["Project", "Mgmt"], ["Change", "Mgmt"]],
+				datasets: [
+					{
+						label: "P.Practitioner",
+						lineTension: 0.1,
+						backgroundColor: "rgba(102, 153, 204, 0.2)",
+						borderColor: "rgba(102, 153, 204, 1)",
+						pointBackgroundColor: "rgba(102, 153, 204, 1)",
+						pointBorderColor: "#fff",
+						pointHoverRadius: 5,
+						pointHoverBackgroundColor: "#fff",
+						pointHoverBorderColor: "rgba(102, 153, 204, 1)",
+						data: [2, 3, 2, 1, 3]
+					},
+					{
+						label: "P.Manager",
+						lineTension: 0.1,
+						backgroundColor: "rgba(255, 204, 102, 0.2)",
+						borderColor: "rgba(255, 204, 102, 1)",
+						pointBackgroundColor: "rgba(255, 204, 102, 1)",
+						pointBorderColor: "#fff",
+						pointHoverRadius: 5,
+						pointHoverBackgroundColor: "#fff",
+						pointHoverBorderColor: "rgba(255, 204, 102, 1)",
+						data: [2, 3, 3, 2, 3]
+					}
+				]
+			},
+			options: {
+				scale: {
+					angleLines: {
+						display: true,
+						lineWidth: 0.5,
+						color: 'rgba(128, 128, 128, 0.2)'
+					},
+					pointLabels: {
+						fontSize: 14,
+						fontStyle: '300',
+						fontColor: 'rgba(204, 204, 204, 1)',
+						fontFamily: "'Lato', sans-serif"
+					},
+					ticks: {
+						beginAtZero: true,
+						maxTicksLimit: 3,
+						min: 0,
+						max: 3,
+						display: false
+					}
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>
