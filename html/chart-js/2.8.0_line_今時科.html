@@ -4,21 +4,23 @@
 <head>
   <meta charset='UTF-8'>
   <meta name='viewport' content='width: device-width, initial-scale= 1, user-scalable= no'>
-  <title>Line Chart Test</title>
+  <title>2.8.0_line_今時科</title>
   <style>
     .box{
-      width: 1000px;
-      height: 351px;
+      /* width: 1000px; */
+      /* height: 351px; */
     }
     #lineChart {
       /* width: 900px; */
-      height: 100%!important;
+      /* height: 100%!important; */
     }
   </style>
   <script src='js/Chart-2.8.0.min.js'></script>
   <script>
     function displayLineChart() {
       var ctx = document.getElementById('lineChart');
+      ctx.width = 2;  // w & h 兩值應一起看，結果實益是寬高比例 
+      ctx.height = 1; // w & h 兩值應一起看，結果實益是寬高比例
       var lineChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -34,11 +36,21 @@
         options: {
 					scales: {
             yAxes: [{
+              // display: false, // 橫軸及值 hide
+              gridLines: {
+                // display: false // 橫軸 hide
+              },
               ticks: {
                 steps : 10,
                 stepValue : 10,
                 max : 100,
                 min: 0
+              }
+            }],
+            xAxes: [{
+              // display: false, // 垂直軸及值 hide
+              gridLines: {
+                display: false // 垂直軸 hide
               }
             }]
           }
